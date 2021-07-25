@@ -20,16 +20,8 @@
         text-dark text-decoration-none
       "
     >
-      <svg
-        class="bi me-2"
-        width="40"
-        height="32"
-        role="img"
-        aria-label="Bootstrap"
-      >
-        <use xlink:href="#bootstrap"></use>
-      </svg>
-      <img :src="logo" />
+      
+      <img :src="logo" width="50px" height="50px" />
     </router-link>
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
@@ -75,7 +67,7 @@
 export default {
   data() {
     return {
-      logo: "https://getbootstrap.com/docs/5.0/assets/img/favicons/favicon.ico",
+      logo: "favicon.ico",
       isLogOut: localStorage.getItem("accessToken"),
     };
   },

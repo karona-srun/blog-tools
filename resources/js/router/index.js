@@ -142,7 +142,7 @@ export const router = new Router({
 
 router.afterEach((to, from) => {
     Vue.nextTick(() => {
-        document.title = to.name + ' - PE Tools' || 'PE Tools';
+        document.title = to.name + ' | Facebook Tools' || 'Facebook Tools';
     });
 });
 

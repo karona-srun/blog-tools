@@ -128,13 +128,19 @@ const routes = [
         component: Privacy
     },
     {
+        path: '/auth/:provider/callback',
+        component: {
+          template: '<div class="auth-component"></div>'
+        }
+    },
+    {
         path: "/:catchAll(.*)*",
         name: "Notfound",
         component: NotFound
     }
 ]
 export const router = new Router({
-    mode: "hash",
+    mode: "history",
     linkActiveClass: "active",
     // linkExactActiveClass: "exact-active",
     routes

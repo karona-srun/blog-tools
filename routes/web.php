@@ -24,6 +24,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::post('sociallogin/{provider}', [App\Http\Controllers\SocialController::class, 'SocialSignup']);
+Route::post('auth/{provider}', 'OutController@index')->where('vue', '.*');
+Route::post('auth/{provider}/callback', 'OutController@index')->where('vue', '.*');
 
 // Route::group(['middleware' => ['auth']], function() {
 //     Route::resource('roles', RoleController::class);

@@ -146,6 +146,7 @@
 
   .multiselect__tags{
     border: 1px solid #999999 !important;
+    height: 40px !important;
   }
   .multiselect__tags:hover{
     border-color: #0d6efd !important;

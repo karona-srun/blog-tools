@@ -21,7 +21,7 @@
       "
     >
       
-      <img :src="logo" width="50px" height="50px" />
+      <img v-bind:src="logo" width="50px" height="50px" />
     </router-link>
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
@@ -47,13 +47,11 @@
     </ul>
     <div class="col-md-3 text-end">
       <router-link v-if="!isLogOut"
-        type="button"
         class="btn btn-outline-primary me-2"
         :to="{ path: '/login' }"
         ><i class="bi bi-person"></i> Login</router-link
       >
       <router-link v-if="!isLogOut"
-        type="button"
         class="btn btn-primary"
         :to="{ path: '/register' }"
         ><i class="bi bi-person-lines-fill"></i> Register</router-link
@@ -67,7 +65,7 @@
 export default {
   data() {
     return {
-      logo: "favicon.ico",
+      logo: "/favicon.ico",
       isLogOut: localStorage.getItem("accessToken"),
     };
   },

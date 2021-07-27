@@ -67,19 +67,22 @@ const actions = {
     addNewPermissions({ commit }, data) {
         return axios.post(`${url}`, data, {
             headers: header
-        }).then(response =>{
+        }).then(response => {
             commit("SET_ROLE", response.data.role);
             commit("SET_PERMISSIONS", response.data.permissions);
-            return response.data.status;
+            return response.data;
         })
     },
     updateRole({ commit}, data){
         return axios.patch(`${url}/${data.id}`,data,{
             headers: header
-        }).then(response =>{
-            commit("SET_ROLE", response.data.role);
-            commit("SET_PERMISSIONS", response.data.role.permissions);
-            return response.data.status;
+        }).then(response => {
+            if( response.data.status == "Success" ){
+                commit("SET_ROLE", response.data.role);
+                commit("SET_PERMISSIONS", response.data.role.permissions);
+                return response.data;
+            } else
+            return response.data;
         })
     },
     deleteRole({ commit }, id) {

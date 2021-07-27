@@ -2,24 +2,11 @@
   <div class="home">
     <h1>User page</h1>
     <p>
-      This is an about page used to illustrate mapping a view to a router with
-      Vue Router.
+      Operation the user page.
     </p>
-    <br />
-    <label for="">accessToken</label>
-    <p class="text-break">{{ accessToken }}</p>
-    <br />
-    <label for="">Roles</label>
-    <p>{{ roles }}</p>
-    <br />
-    <label for="">Permissions</label>
-    <p>{{ permissions }}</p>
-    <label for="">User</label>
-    <p>{{ currentUser }}</p>
-
     <div>
       <div v-if="canCreateUsers">
-      <router-link :to="{ path: '/users/create' }" class="btn btn-primary"><i class="bi bi-plus"></i> Create User</router-link>
+      <router-link :to="{ path: '/users/create' }" v-if="canListUsers" class="btn btn-primary"><i class="bi bi-plus"></i> Create User</router-link>
     </div>
       <table class="table">
         <thead>
@@ -41,8 +28,8 @@
             <span>{{ user.updated_at }}</span>
           </td>
           <td>
-            <button @click.prevent="editUser(user.id)" class="btn btn-primary"><i class="bi bi-pencil"></i></button>
-            <button @click.prevent="deleteUser(user.id)" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+            <button @click.prevent="editUser(user.id)" v-if="canEditUsers" class="btn btn-primary"><i class="bi bi-pencil"></i></button>
+            <button @click.prevent="removeUser(user.id)" v-if="canDeleteUsers" class="btn btn-danger"><i class="bi bi-trash"></i></button>
           </td>
         </tr>
         </tbody>
@@ -89,6 +76,17 @@ export default {
     editUser(id){
       this.$router.push({ path: 'user/'+id });
       this.$router.go();
+    },
+    removeUser(id){
+      this.$vToastify.prompt({
+          body: "Are you sure you want to delete this user?",
+          answers: { Yes: true, No: false }
+      }).then(value => {
+          if (value) {
+              this.deleteUser(id);
+              this.$vToastify.success("User deleted successfully.")
+          }
+      })
     }
   },
   created() {

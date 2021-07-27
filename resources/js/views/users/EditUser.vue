@@ -1,39 +1,54 @@
 <template>
   <div>
-    <form @submit.prevent="handleUpdateUser" ref="User">
-      <div>
-        <input type="text" v-model="user.name" />
+    <div class="card bg-light p-2">
+      <div class="card-body">
+        <h5 class="card-title">Edit Users</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Please enter your datas</h6>
+        <form @submit.prevent="handleUpdateUser" ref="User">
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Please enter your name"
+              v-model="user.name"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email Address</label>
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Please enter your email address"
+              v-model="user.email"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Role</label>
+            <multiselect
+              v-model="optionRoles"
+              :options="roles"
+              :multiple="true"
+              :searchable="false"
+              :allow-empty="false"
+              placeholder="Select one role you want to"
+            ></multiselect>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" v-model="user.password" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Re-type Password</label>
+            <input type="password" class="form-control" v-model="user.password_confirmation" />
+          </div>
+          <div class="card-text mt-4">
+            <button type="submit" class="btn btn-primary me-2">Submit</button>
+            <button type="button" @click.prevent="handleBack" class="btn btn-danger">Cancel</button>
+          </div>
+        </form>
       </div>
-      <div>
-        <input type="email" v-model="user.email" />
-      </div>
-      <!-- <div>
-        <select v-model="user.roles[0].name">
-          <option v-for="data in roles" :key="data" :value="data">
-            {{ data }}
-          </option>
-        </select>
-      </div> -->
-      <div>
-        <multiselect
-          v-model="optionRoles"
-          :options="roles"
-          :multiple="true"
-          :searchable="false" 
-          :allow-empty="false"
-          placeholder="Select one role you want to"
-        ></multiselect>
-      </div>
-      <div>
-        <input type="password" v-model="user.password" />
-      </div>
-      <div>
-        <input type="password" v-model="user.password_confirmation" />
-      </div>
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+    </div>
   </div>
 </template>
 <script>
@@ -43,7 +58,7 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
-      optionRoles: []
+      optionRoles: [],
     };
   },
   methods: {
@@ -56,20 +71,27 @@ export default {
         email: this.user.email,
         password: this.user.password,
         password_confirmation: this.user.password_confirmation,
-        roles: this.optionRoles
+        roles: this.optionRoles,
       };
-      console.log(data)
       let response = this.updateUser(data);
-      response.then(function(result) {
-        console.log(result)
-      })
-      this.$refs.User.reset();
-      this.$router.push({ path: '/user'});
+      response.then((result) => {
+        console.log(result);
+        if (result.status == "Success"){
+          this.$vToastify.success(result.message, result.status);
+          this.$refs.User.reset();
+          this.$router.push({ path: "/user" });
+        }
+        if(result.status == "Failed"){
+          this.$vToastify.error(result.message, result.status);
+        }
+      });
     },
+    handleBack(){
+      this.$router.push({ path: "/user" })
+    }
   },
   created() {
     this.editUser(this.id);
-    
   },
   mounted() {
     this.optionRoles = this.userRoles;

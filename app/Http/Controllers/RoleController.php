@@ -67,14 +67,14 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [ 
             'name' => 'required|unique:roles,name',
             'permission' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
-                'status' => 'fail',
+                'status' => 'Failed',
                 'message' => 'Creating role is failed'
             ], 200);
         }
@@ -83,7 +83,8 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permission'));
 
         return response()->json([
-            'status' => 'success'
+            'status' => 'Success',
+            'message' => 'Role created successfully.',
         ], 200);
         // return redirect()->route('roles.index')
         //     ->with('success', 'Role created successfully');
@@ -134,14 +135,14 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [ 
             'name' => 'required',
             'permission' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
-                'status' => 'fail',
+                'status' => 'Failed',
                 'message' => 'Updating role is failed'
             ], 200);
         }
@@ -153,7 +154,8 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permission'));
 
         return response()->json([
-            'status' => 'success',
+            'status' => 'Success',
+            'message' => 'User updated successfully',
             'role' => $role
         ], 200);
         // return redirect()->route('roles.index')

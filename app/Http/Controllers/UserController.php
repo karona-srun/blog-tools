@@ -60,9 +60,9 @@ class UserController extends Controller
 
         if ($validator->fails()) {    
             return response()->json([
-                'status' => 'fail',
-                'message' => 'User is failed'
-            ], 411);
+                'status' => 'Failed',
+                'message' => 'User is failed.'
+            ], 200);
         }
 
         $input = $request->all();
@@ -72,8 +72,8 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
     
         return response()->json([
-            'status' => 'success',
-            'message' => 'User created successfully',
+            'status' => 'Success',
+            'message' => 'User created successfully.',
             'data' => $user
         ], 200);
 
@@ -122,12 +122,19 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [ 
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'. $request->id,
             'password' => 'same:password_confirmation',
             'roles' => 'required'
         ]);
+
+        if ($validator->fails()) {    
+            return response()->json([
+                'status' => 'Failed',
+                'message' => 'User update is failed.'
+            ], 200);
+        }
     
         $input = $request->all();
         if(!empty($input['password'])){ 
@@ -143,7 +150,7 @@ class UserController extends Controller
         $user->assignRole($request->roles);
     
         return response()->json([
-            'status' => 'success',
+            'status' => 'Success',
             'message' => 'User updated successfully',
             'data' => $user
         ], 200);

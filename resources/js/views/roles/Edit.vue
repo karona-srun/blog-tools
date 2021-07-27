@@ -1,24 +1,47 @@
 <template>
   <div>
-    <form @submit.prevent="handleSubmit">
-      <div>
-        <strong>Role:</strong>
-        <input type="text" v-model="role.name" />
+    <div class="card bg-light p-2">
+      <div class="card-body">
+        <h5 class="card-title">Edit Role</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Please enter your datas</h6>
+        <form @submit.prevent="handleSubmit" ref="Role">
+          <div class="mb-3">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="role.name"
+              placeholder="Please enter your role name"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="name">Permissions</label>
+            <div v-for="(permission, index) in permissions" :key="index">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                v-model="seletctedPermission"
+                :value="permission.id"
+              />
+              <span class="form-check-label text-capitalize">
+                {{ permission.name }}
+              </span>
+              <br />
+            </div>
+          </div>
+          <div class="card-text mt-4">
+            <button type="submit" class="btn btn-primary me-2">Submit</button>
+            <button
+              type="button"
+              @click.prevent="handleBack"
+              class="btn btn-danger"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
       </div>
-      <div>
-        <strong>Permission:</strong>
-        <div v-for="(permission, index) in permissions" :key="index">
-          <input
-            type="checkbox"
-            v-model="seletctedPermission"
-            :value="permission.id"
-          />{{ permission.name }}
-        </div>
-      </div>
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+    </div>
   </div>
 </template>
 <script>
@@ -27,7 +50,7 @@ export default {
   name: "EditRole",
   data() {
     return {
-        seletctedPermission: []
+      seletctedPermission: [],
     };
   },
   created() {
@@ -45,14 +68,23 @@ export default {
         name: this.role.name,
         permission: this.seletctedPermission,
       };
-      let response = this.updateRole(data)
+      console.log(data);
+      let response = this.updateRole(data);
       response.then((result) => {
-        console.log(result)
-        this.$router.push({ path: '/role'})
-        this.$router.go()
-      })
-      
-    }
-  }
+        console.log(result);
+        if (result.status == "Success") {
+          this.$vToastify.success(result.message, result.status);
+          this.$refs.Role.reset();
+          this.$router.push({ path: "/role" });
+        }
+        if (result.status == "Failed") {
+          this.$vToastify.error(result.message, result.status);
+        }
+      });
+    },
+    handleBack() {
+      this.$router.push({ path: "/role" });
+    },
+  },
 };
 </script>

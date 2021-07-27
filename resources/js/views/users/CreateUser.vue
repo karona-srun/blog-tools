@@ -1,49 +1,64 @@
 <template>
   <div>
-    <form @submit.prevent="handleCreateUser" ref="User">
-      <div>
-        <input type="text" class="form-control" v-model="user.name" />
+    <div class="card bg-light p-2">
+      <div class="card-body">
+        <h5 class="card-title">Create Users</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Please enter your datas</h6>
+        <form @submit.prevent="handleCreateUser" ref="User">
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Please enter your name"
+              v-model="user.name"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email Address</label>
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Please enter your email address"
+              v-model="user.email"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Roles</label>
+            <multiselect
+              v-model="value"
+              :options="values"
+              :multiple="true"
+              :searchable="false"
+              :allow-empty="false"
+              placeholder="Select one role you want to"
+              open-direction="bottom"
+            ></multiselect>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              v-model="user.password"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Re-type Password</label>
+            <input
+              type="password"
+              class="form-control"
+              v-model="user.password_confirmation"
+            />
+          </div>
+          <div class="card-text mt-4">
+            <button type="submit" class="btn btn-primary me-2">Submit</button>
+            <button type="button" @click.prevent="handleBack" class="btn btn-danger">Cancel</button>
+          </div>
+        </form>
       </div>
-      <div>
-        <input type="email" class="form-control" v-model="user.email" />
-      </div>
-      <div>
-        <select class="form-select" v-model="selectedRoles">
-          <option
-            v-for="data in roles"
-            :key="data.id"
-            v-show="data.id"
-            :value="data.name"
-          >
-            {{ data.name }}
-          </option>
-        </select>
-      </div>
-      <div>
-        <multiselect
-          v-model="value"
-          :options="values"
-          :multiple="true"
-          :searchable="false" 
-          :allow-empty="false"
-          placeholder="Select one role you want to"
-          open-direction="bottom"
-        ></multiselect>
-      </div>
-      <div>
-        <input type="password" class="form-control" v-model="user.password" />
-      </div>
-      <div>
-        <input
-          type="password"
-          class="form-control"
-          v-model="user.password_confirmation"
-        />
-      </div>
-      <div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-    </form>
+    </div>
   </div>
 </template>
 <script>
@@ -86,12 +101,20 @@ export default {
         password_confirmation: this.user.password_confirmation,
         roles: this.value,
       };
+
       let response = this.addUsers(data);
       response.then((result) => {
         console.log(result); // "Some User token"
+        if (result.status == "Success")
+          this.$vToastify.success(result.message, result.status);
+        if (result.status == "Failed")
+          this.$vToastify.error(result.message, result.status);
       });
       this.$refs.User.reset();
     },
+    handleBack(){
+      this.$router.push({ path: "/user" })
+    }
   },
 };
 </script>

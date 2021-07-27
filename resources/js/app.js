@@ -7,8 +7,14 @@ import "vue-multiselect/dist/vue-multiselect.min.css";
 import VueAxios from 'vue-axios';
 import VueSocialauth from 'vue-social-auth';
 import axios from 'axios';
+import VueToastify from "vue-toastify";
 
 Vue.config.productionTip  =  false;
+Vue.use(VueToastify,{
+    theme:'light',
+    position: 'top-right',
+    my: "settings"
+});
 Vue.component('multiselect', Multiselect);
 Vue.use(VueAxios, axios);
 Vue.use(VueSocialauth, {

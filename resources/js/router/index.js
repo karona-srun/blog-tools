@@ -149,6 +149,9 @@ export const router = new Router({
 router.afterEach((to, from) => {
     Vue.nextTick(() => {
         document.title = to.name + ' | Facebook Tools' || 'Facebook Tools';
+        console.log(to)
+        if(to.status == 400)
+            store.dispatch("auth/logout")
     });
 });
 

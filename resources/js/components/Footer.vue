@@ -14,7 +14,7 @@
             href="/"
             aria-label="Facebook Tools"
           >
-            <img src="logo_footer.png" alt="" width="210px" height="50px"  srcset="">
+            <img :src="logo_footer" alt="" width="210px" height="50px"  srcset="">
           </a>
           <ul class="list-unstyled small text-muted">
             <li class="mb-2">
@@ -84,3 +84,12 @@
     </div>
   </footer>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      logo_footer: '/logo_footer.png'
+    }
+  }
+}
+</script>

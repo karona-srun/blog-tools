@@ -3,8 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UserController;
+// use App\Http\Controllers\RoleController;
+// use App\Http\Controllers\UserController;
+// use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,9 @@ Route::prefix('auth')->group(function () {
 Route::middleware('auth:api')->group(function () {
     Route::resource('roles',RoleController::class);
     Route::resource('users', UserController::class);
+    Route::resource('blogs', BlogController::class);
+    Route::post('blogs/blogs-update', [App\Http\Controllers\BlogController::class, 'update']);
+    Route::resource('comments', CommentController::class);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

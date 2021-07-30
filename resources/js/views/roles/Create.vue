@@ -67,10 +67,8 @@ export default {
         name: this.name,
         permission: this.selectedPermission,
       };
-      console.log(data);
       let response = this.addNewPermissions(data);
       response.then((result) => {
-        console.log(result); // "Some User token"
         if (result.status == "Success") {
           this.$router.push({ path: "/role" });
           this.$vToastify.success(result.message, result.status);

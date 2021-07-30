@@ -24,10 +24,10 @@ class PermissionSeeder extends Seeder
             'user-create',
             'user-edit',
             'user-delete',
-            'product-list',
-            'product-create',
-            'product-edit',
-            'product-delete',
+            'blog-list',
+            'blog-create',
+            'blog-edit',
+            'blog-delete',
         ];
 
         foreach ($adminPermissions as $permission) {
@@ -40,10 +40,10 @@ class PermissionSeeder extends Seeder
 
         $role = Role::create(['name' => 'User Normal']);
         $role->givePermissionTo([
-            'product-list',
-            'product-create',
-            'product-edit',
-            'product-delete',
+            'blog-list',
+            'blog-create',
+            'blog-edit',
+            'blog-delete',
         ]);
     }
 }

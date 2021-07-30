@@ -2,7 +2,12 @@ import Vue from "vue";
 import Router from "vue-router";
 import store from "../store";
 import Home from "../views/Home.vue";
-import Blogs from "../views/Blogs.vue";
+
+import Blogs from "../views/blogs/Blogs.vue";
+import CreateBlogs from "../views/blogs/Create.vue";
+import EditBlogs from "../views/blogs/Edit.vue";
+import ShowBlogs from "../views/blogs/Show.vue";
+
 import About from "../views/About.vue";
 import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
@@ -35,6 +40,21 @@ const routes = [
         path: "/blogs",
         name: "Blogs",
         component: Blogs,
+    },
+    {
+        path: "/blogs/create",
+        name: "Blogs",
+        component: CreateBlogs,
+    },
+    {
+        path: "/blogs/edit/:id",
+        name: "Blogs",
+        component: EditBlogs,
+    },
+    {
+        path: "/blogs/view/:id",
+        name: "View Blogs",
+        component: ShowBlogs,
     },
     {
         path: "/about",
@@ -149,9 +169,6 @@ export const router = new Router({
 router.afterEach((to, from) => {
     Vue.nextTick(() => {
         document.title = to.name + ' | Facebook Tools' || 'Facebook Tools';
-        console.log(to)
-        if(to.status == 400)
-            store.dispatch("auth/logout")
     });
 });
 

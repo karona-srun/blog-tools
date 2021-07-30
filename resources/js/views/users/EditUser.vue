@@ -62,8 +62,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["editUser"]),
-    ...mapActions(["updateUser"]),
+    ...mapActions(["editUser","updateUser"]),
     handleUpdateUser() {
       let data = {
         id: this.id,
@@ -75,7 +74,6 @@ export default {
       };
       let response = this.updateUser(data);
       response.then((result) => {
-        console.log(result);
         if (result.status == "Success"){
           this.$vToastify.success(result.message, result.status);
           this.$refs.User.reset();

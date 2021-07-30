@@ -8,7 +8,7 @@ class API {
         if (token) {
             let header = {
                 "Access-Control-Allow-Origin": "*",
-                "Content-Type": "application/x-www-form-urlencoded; application/json; charset=UTF-8",
+                "Content-Type": "application/x-www-form-urlencoded; multipart/form-data; application/json; charset=UTF-8",
                 "Accept": "application/json",
                 "Authorization": `Bearer ${token}`
             };

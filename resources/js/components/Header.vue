@@ -46,17 +46,17 @@
       </li>
     </ul>
     <div class="col-md-3 text-end">
-      <router-link v-if="!isLogOut"
+      <router-link v-if="!isLoggedOut"
         class="btn btn-outline-primary me-2"
         :to="{ path: '/login' }"
         ><i class="bi bi-person"></i> Login</router-link
       >
-      <router-link v-if="!isLogOut"
+      <router-link v-if="!isLoggedOut"
         class="btn btn-primary"
         :to="{ path: '/register' }"
         ><i class="bi bi-person-lines-fill"></i> Register</router-link
       >
-      <button v-if="isLogOut" @click.prevent="handleLogout" class="btn btn-outline-primary"><i class="bi bi-chevron-bar-left"></i> Log-Out</button>
+      <button v-if="isLoggedOut" @click.prevent="handleLogout" class="btn btn-outline-primary"><i class="bi bi-chevron-bar-left"></i> Log-Out</button>
     </div>
   </header>
 </template>
@@ -66,7 +66,7 @@ export default {
   data() {
     return {
       logo: "/favicon.ico",
-      isLogOut: localStorage.getItem("accessToken"),
+      isLoggedOut: localStorage.getItem("accessToken") ? true:false,
     };
   },
   methods: {

@@ -104,7 +104,6 @@ export default {
 
       let response = this.addUsers(data);
       response.then((result) => {
-        console.log(result); // "Some User token"
         if (result.status == "Success")
           this.$vToastify.success(result.message, result.status);
         if (result.status == "Failed")

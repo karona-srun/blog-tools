@@ -68,10 +68,8 @@ export default {
         name: this.role.name,
         permission: this.seletctedPermission,
       };
-      console.log(data);
       let response = this.updateRole(data);
       response.then((result) => {
-        console.log(result);
         if (result.status == "Success") {
           this.$vToastify.success(result.message, result.status);
           this.$refs.Role.reset();

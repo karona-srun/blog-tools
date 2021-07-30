@@ -80,7 +80,6 @@ export default {
         })
         .catch((error) => {
           throw new Error(error);
-          // console.log(error)
         });
     },
     authProvider(provider) {

@@ -4,6 +4,7 @@ import createPersistedState from "vuex-persistedstate";
 import auth from './modules/auth.module';
 import user from './modules/user.module';
 import role from './modules/role.module';
+import blog from './modules/blog.module';
 
 Vue.use(Vuex);
 
@@ -13,7 +14,8 @@ export default new Vuex.Store({
     modules: {
         auth,
         user,
-        role
+        role,
+        blog
     },    
     
     state: {

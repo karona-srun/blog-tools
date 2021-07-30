@@ -19,10 +19,10 @@
               <router-link :to="{ path:'/blogs' }" class="nav-link link-dark" href="#">Blogs</router-link>
             </li>
             <li class="nav-item" v-if="isLoggedIn">
-              <router-link :to="{ path:'/user' }" class="nav-link link-dark" href="#">Users</router-link>
+              <router-link :to="{ path:'/user' }" v-if="canListUsers" class="nav-link link-dark" href="#">Users</router-link>
             </li>
             <li class="nav-item" v-if="isLoggedIn">
-              <router-link :to="{ path:'/role' }" class="nav-link link-dark" href="#">Roles</router-link>
+              <router-link :to="{ path:'/role' }"  v-if="canListRoles" class="nav-link link-dark" href="#">Roles</router-link>
             </li>
           </ul>
         </div>
@@ -47,25 +47,44 @@
       return {
         logo: "https://getbootstrap.com/docs/5.0/assets/img/favicons/favicon.ico",
         isLoggedIn: localStorage.getItem("accessToken") ? true : false,
+        permissions: localStorage.getItem("userPermissions")
+        ? localStorage.getItem("userPermissions")
+        : "",
       }
     },
     mounted() {
       this.$nextTick(function () {
         UserService.getUserBoard().then((response) => {
-          console.log("accessToken Successfully")
+          console.log("access Successfully")
         }).catch((error) => {
-          console.log("accessToken Failed")
+          console.log("access Failed")
+          this.$store.dispatch("auth/logout");
         })
       })
-    }
+    },
+    computed: {
+      canListRoles() {
+        return this.permissions.includes("role-list");
+      },
+      canListUsers() {
+        return this.permissions.includes("user-list");
+      },
+      canListBlogs() {
+        return this.permissions.includes("blog-list");
+      },
+    },
   }
 </script>
 <style>
   html body {
-    font-family: 'Nunito Sans', sans-serif;
-    /* font-family: 'Yomogi', cursive !important; */
+    font-family: 'Ubuntu', sans-serif;
   }
-
+  
+  h1, h2, h3, h4, h5, h6{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 700;
+  }
+  
   .navbar-toggler {
     border-color: transparent !important;
     outline: 0 !important;
@@ -150,5 +169,8 @@
   }
   .multiselect__tags:hover{
     border-color: #0d6efd !important;
+  }
+  .ql-container {
+    height: 50vh !important;
   }
 </style>

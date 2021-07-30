@@ -41,7 +41,6 @@ class UserService {
   }
 
   getUsers() {
-    console.log(api.setAPIURL())
     return axios.get(api.setAPIURL() + 'users', { headers: api.setHeaders() }).then(response =>{
         let users = response.data.data
         return users;  

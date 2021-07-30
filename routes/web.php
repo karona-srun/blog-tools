@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\ProductController;
+// use App\Http\Controllers\UserController;
+// use App\Http\Controllers\RoleController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OutController;
+use App\Http\Controllers\SocialController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,11 +24,11 @@ Route::get('/{any?}', function (){
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::post('sociallogin/{provider}', [App\Http\Controllers\SocialController::class, 'SocialSignup']);
-Route::post('auth/{provider}', 'OutController@index')->where('vue', '.*');
-Route::post('auth/{provider}/callback', 'OutController@index')->where('vue', '.*');
+Route::post('sociallogin/{provider}', [SocialController::class,'SocialSignup']);
+Route::post('auth/{provider}', [OutController::class, 'index'])->where('vue', '.*');
+Route::post('auth/{provider}/callback', [OutController::class, 'index'])->where('vue', '.*');
 
 // Route::group(['middleware' => ['auth']], function() {
 //     Route::resource('roles', RoleController::class);

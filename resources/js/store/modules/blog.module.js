@@ -7,13 +7,13 @@ let header = api.setHeaders();
 const state = {
     blogs       : {},
     blog        : {},
-    showblog    : []
+    showblog    : {}
 };
 
 const getters = {
     blogs       : state => state.blogs,
     blog        : state => state.blog,
-    showblog    : state => state.blog,
+    showblog    : state => state.showblog,
 }
 
 const actions = {
@@ -82,16 +82,9 @@ const actions = {
 }
 
 const mutations = {
-    FETCH_BLOGS: (state, blogs) => (state.blogs = blogs),
-    ADD_NEW_BLOGS: (state, blog) => (state.blog = blog),
-    SHOW_BLOG:  (state, payload) => {
-        state.blogs = state.blogs.map(blog => {
-          if (blog.id === payload.id) {
-            return Object.assign({}, blog, payload.data)
-          }
-          return blog;
-        });
-    },
+    FETCH_BLOGS: (state, blogs) => state.blogs = blogs,
+    ADD_NEW_BLOGS: (state, blog) => state.blogs.unshift(blog),
+    SHOW_BLOG:  (state, blog) => state.showblog = blog,
     UPDATE_BLOG: (state,  payload) => {
         state.blogs = state.blogs.map(blog => {
           if (blog.id === payload.id) {

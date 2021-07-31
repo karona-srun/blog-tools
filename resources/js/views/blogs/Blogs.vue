@@ -78,6 +78,7 @@ export default {
     },
     editBlogs(id) {
       this.$router.push({ path: "/blogs/edit/" + id });
+      this.$router.go();
     },
     deleteBlogs(id) {
       this.$vToastify.prompt({

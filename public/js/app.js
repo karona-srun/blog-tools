@@ -2536,6 +2536,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$router.push({
         path: "/blogs/edit/" + id
       });
+      this.$router.go();
     },
     deleteBlogs: function deleteBlogs(id) {
       var _this = this;
@@ -4379,7 +4380,7 @@ var header = _api__WEBPACK_IMPORTED_MODULE_2__.default.setHeaders();
 var state = {
   blogs: {},
   blog: {},
-  showblog: []
+  showblog: {}
 };
 var getters = {
   blogs: function blogs(state) {
@@ -4389,7 +4390,7 @@ var getters = {
     return state.blog;
   },
   showblog: function showblog(state) {
-    return state.blog;
+    return state.showblog;
   }
 };
 var actions = {
@@ -4544,16 +4545,10 @@ var mutations = {
     return state.blogs = blogs;
   },
   ADD_NEW_BLOGS: function ADD_NEW_BLOGS(state, blog) {
-    return state.blog = blog;
+    return state.blogs.unshift(blog);
   },
-  SHOW_BLOG: function SHOW_BLOG(state, payload) {
-    state.blogs = state.blogs.map(function (blog) {
-      if (blog.id === payload.id) {
-        return Object.assign({}, blog, payload.data);
-      }
-
-      return blog;
-    });
+  SHOW_BLOG: function SHOW_BLOG(state, blog) {
+    return state.showblog = blog;
   },
   UPDATE_BLOG: function UPDATE_BLOG(state, payload) {
     state.blogs = state.blogs.map(function (blog) {

@@ -19,8 +19,8 @@
           :key="i"
           class="col-lg-3 col-md-4 col-sm-12 mb-4"
         >
-          <div class="card">
-            <img class="card-img-top" :src="blog.path" v-if="blog.path" alt="Unsplash" />
+          <div class="card card-shadow">
+            <img class="card-img-top shadow rounded" :src="blog.path" v-if="blog.path" alt="Unsplash" />
             <div class="card-body">
               <div class="row clearfix">
                 <div class="col-lg-10 col-md-10 col-sm-10">
@@ -155,5 +155,13 @@ export default {
   margin-bottom: 0;
   background-color: #fff;
   border-bottom: 0 solid transparent;
+}
+.card-img, .card-img-bottom, .card-img-top{
+    height: 130px !important;
+}
+.card-shadow:hover{
+  border: 1px solid;
+  padding: 5px;
+  box-shadow: 5px 5px black;
 }
 </style>

@@ -7069,7 +7069,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.card-subtitle,\n.card-title {\n  font-weight: 400;\n}\n.card-title {\n  font-size: 0.875rem;\n  color: #495057;\n}\n.card {\n  margin-bottom: 24px;\n  box-shadow: 0 0 0.875rem 0 rgba(33, 37, 41, 0.05);\n}\n.card {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  min-width: 0;\n  word-wrap: break-word;\n  background-color: #fff;\n  background-clip: initial;\n  border: 0 solid transparent;\n  border-radius: 0.25rem;\n}\n.card-body {\n  flex: 1 1 auto;\n  padding: 1.25rem;\n}\n.card-header:first-child {\n  border-radius: 0.25rem 0.25rem 0 0;\n}\n.card-header {\n  border-bottom-width: 1px;\n}\n.pb-0 {\n  padding-bottom: 0 !important;\n}\n.card-header {\n  padding: 1rem 1.25rem;\n  margin-bottom: 0;\n  background-color: #fff;\n  border-bottom: 0 solid transparent;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.card-subtitle,\n.card-title {\n  font-weight: 400;\n}\n.card-title {\n  font-size: 0.875rem;\n  color: #495057;\n}\n.card {\n  margin-bottom: 24px;\n  box-shadow: 0 0 0.875rem 0 rgba(33, 37, 41, 0.05);\n}\n.card {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  min-width: 0;\n  word-wrap: break-word;\n  background-color: #fff;\n  background-clip: initial;\n  border: 0 solid transparent;\n  border-radius: 0.25rem;\n}\n.card-body {\n  flex: 1 1 auto;\n  padding: 1.25rem;\n}\n.card-header:first-child {\n  border-radius: 0.25rem 0.25rem 0 0;\n}\n.card-header {\n  border-bottom-width: 1px;\n}\n.pb-0 {\n  padding-bottom: 0 !important;\n}\n.card-header {\n  padding: 1rem 1.25rem;\n  margin-bottom: 0;\n  background-color: #fff;\n  border-bottom: 0 solid transparent;\n}\n.card-img, .card-img-bottom, .card-img-top{\n    height: 130px !important;\n}\n.card-shadow:hover{\n  border: 1px solid;\n  padding: 5px;\n  box-shadow: 5px 5px black;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24171,10 +24171,10 @@ var render = function() {
             "div",
             { key: i, staticClass: "col-lg-3 col-md-4 col-sm-12 mb-4" },
             [
-              _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card card-shadow" }, [
                 blog.path
                   ? _c("img", {
-                      staticClass: "card-img-top",
+                      staticClass: "card-img-top shadow rounded",
                       attrs: { src: blog.path, alt: "Unsplash" }
                     })
                   : _vm._e(),
@@ -24798,7 +24798,7 @@ var render = function() {
           _vm._v(" "),
           _vm.showblog.path
             ? _c("img", {
-                staticClass: "card-img-top",
+                staticClass: "shadow rounded",
                 attrs: { src: _vm.showblog.path, alt: "Unsplash" }
               })
             : _vm._e(),

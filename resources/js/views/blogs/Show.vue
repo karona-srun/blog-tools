@@ -7,7 +7,7 @@
           <p><i class="bi bi-calendar-date"></i> {{ showblog.created_at }} <i class="bi bi-person"></i> {{ showblog.creator }}</p>
           <hr>
           <img
-              class="card-img-top"
+              class="shadow rounded"
               :src="showblog.path"
               v-if="showblog.path"
               alt="Unsplash"
